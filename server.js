@@ -40,5 +40,7 @@ io.on('connection', (socket) => {
     console.log('User disconnected');
   });
 });
-
+app.get('/', (req, res) => {
+  res.send("🧠 Realtime Chat Backend is Running");
+});
 server.listen(5000, () => console.log('Server running on port 5000'));
