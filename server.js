@@ -8,12 +8,19 @@ require('dotenv').config();
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: { origin: '*' }
+  cors: {
+    origin: 'http://your-frontend-url.com',
+    methods: ['GET', 'POST']
+  }
 });
 
 app.use(cors());
 app.use(express.json());
-
+app.use(cors({
+  origin: ['http://localhost:3000'], // ✅ Update with frontend domain in production
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
